@@ -1,13 +1,13 @@
 import HeroSection from '../components/HeroSection'
 import FeaturedSection from '../components/FeaturedSection'
-import Movies from './Movies'
+import TrailersSection from '../components/TrailersSection'
 
 const Home = () => {
   return (
     <>
       <HeroSection />
       <FeaturedSection />
-      <Movies />
+      <TrailersSection />
     </>
   )
 }

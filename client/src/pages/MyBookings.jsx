@@ -44,6 +44,17 @@ const MyBookings = () => {
               <p className="text-gray-400 text-sm">{dateFormat(item.show.showDateTime)}</p>
             </div>
           </div>
+
+          <div className="flex flex-col md:item-end. md:text-right justify-between p-4">
+            <div className="flex items-center gap-4">
+              <p className="text-2xl font-semibold mb-3">{currency}{item.amount}</p>
+              {!item.isPaid && <button className="bg-primary px-4 py-1.5 mb-3 text-sm rounded-full font-medium cursor-pointer">Pay Now</button>}
+            </div>
+            <div>
+              <p><span className="text-gray-400">Total. Tickets: </span>{item.bookedSeats.length}</p>
+              <p><span className="text-gray-400">Seat Number: </span>{item.bookedSeats.join(", ")}</p>
+            </div>
+          </div>
         </div>
       ))}
     </div>

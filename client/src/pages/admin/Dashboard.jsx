@@ -12,7 +12,7 @@ import BlurCircle from "../../components/BlurCircle";
 
 const Dashboard = () => {
   const currency = import.meta.env.VITE_CURRENCY;
-  const [dashboardData, setDataboardData] = useState({
+  const [dashboardData, setDashboardData] = useState({
     totalBookings: 0,
     totalRevenue: 0,
     activeShows: [],
@@ -29,7 +29,7 @@ const Dashboard = () => {
     },
     {
       title: "Total Revenue",
-      value: currency + dashboardData.totalRevenue || "0",
+      value: `${currency}${dashboardData.totalRevenue ?? 0}`,
       icon: CircleDollarSignIcon,
     },
     {
@@ -45,7 +45,7 @@ const Dashboard = () => {
   ];
 
   const fetchDashboardData = async () => {
-    setDataboardData(dummyDashboardData);
+    setDashboardData(dummyDashboardData);
     setLoading(false);
   };
 

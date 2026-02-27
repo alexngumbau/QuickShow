@@ -4,10 +4,10 @@ import Loading from "../../components/Loading";
 import Title from "../../components/admin/Title";
 import { dateFormat } from "../../lib/dateFormat";
 
-// drake scorpion
+
 const ListBookings = () => {
 
-  const currency = import.meta.env.VITE_CURRENCY
+  const currency = import.meta.env.VITE_CURRENCY || "$"
 
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

@@ -79,9 +79,9 @@ const Dashboard = () => {
         <p className="mt-10 text-lg font-medium">Active Shows</p>
         <div className="relative flex flex-wrap gap-6 mt-4 max-w-5xl">
           <BlurCircle top="100px" left="-10" />
-          {dashboardData.activeShows.map((show, index) => (
+          {dashboardData.activeShows.map((show) => (
             <div
-              key={index}
+              key={show._id}
               className="w-55 rounded-lg overflow-hidden pb-3 bg-primary/10 border border-primary/20 hover:-translate-y-1 transition duration-300"
             >
               <img

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// API to get now playing movies from TMDB API
 export const getNowPlayingMovies = async (req, res) => {
   try {
     const { data } = await axios.get(
@@ -15,3 +16,12 @@ export const getNowPlayingMovies = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+// API to add a new show to the database
+export const addShow = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+}

@@ -9,14 +9,14 @@ import { inngest, functions } from "./inngest/index.js";
 
 
 const app = express();
-const port = 3000;
+const port = Number(process.env.PORT) || 3000;
 
 await connectDB();
 
 // Middleware
 app.use(express.json());
 app.use(cors());
-app.use(clerkMiddleware);
+app.use(clerkMiddleware());
 
 // API Routes
 app.get("/", (req, res) => res.send("Server is Live!"));
@@ -25,11 +25,3 @@ app.use("/api/inngest", serve({ client: inngest, functions }));
 app.listen(port, () =>
   console.log(`Server listening at http://localhost:${port}`),
 );
-
-// NaJ7M9VNEgOtglHx
-// mongodb+srv://alexngumbau48:NaJ7M9VNEgOtglHx@cluster1.nxrcu8v.mongodb.net/?appName=Cluster1
-// mongodb+srv://alexngumbau48:NaJ7M9VNEgOtglHx@cluster1.nxrcu8v.mongodb.net
-
-// quickshow2
-// username - alexngumbau48_db_user
-// password - quickshow2

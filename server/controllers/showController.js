@@ -85,11 +85,9 @@ export const addShow = async (req, res) => {
 // API to get all shows from the database
 export const getShows = async (req, res) => {
   try {
-    const shows = (
-      await Show.find({ showDateTime: { $gte: new Date() } })
+    const shows = await Show.find({ showDateTime: { $gte: new Date() } })
       .populate("movie")
-      .sort({ showDateTime: 1 })
-    );
+      .sort({ showDateTime: 1 });
     console.log(shows);
 
     // filter unique shows
@@ -115,6 +113,11 @@ export const getShow = async (req, res) => {
     });
 
     const movie = await Movie.findById(movieId);
+    if (!movie) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Movie not found" });
+    }
     const dateTime = {};
 
     shows.forEach((show) => {

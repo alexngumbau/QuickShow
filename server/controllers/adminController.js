@@ -35,7 +35,7 @@ export const getAllShows = async (req, res) => {
   try {
     const shows = (
       await Show.find({ showDateTime: { $gte: new Date() } }).populate("movie")
-    ).toSorted({ showDateTime: 1 });
+    ).sort({ showDateTime: 1 });
     res.json({ success: true, shows });
   } catch (error) {
     console.log(error);

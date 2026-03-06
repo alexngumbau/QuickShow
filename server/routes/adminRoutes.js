@@ -8,7 +8,7 @@ import {
 } from "../controllers/adminController.js";
 
 const adminRouter = express.Router();
-adminRouter.get("/isAdmin", protectAdmin, isAdmin);
+adminRouter.get("/is-admin", protectAdmin, isAdmin);
 adminRouter.get("/dashboard", protectAdmin, getDashboardData);
 adminRouter.get("/all-shows", protectAdmin, getAllShows);
 adminRouter.get("/all-bookings", protectAdmin, getAllBookings);

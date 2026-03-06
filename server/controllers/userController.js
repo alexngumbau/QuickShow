@@ -11,7 +11,7 @@ export const getUserBookings = async (req, res) => {
         path: "show",
         populate: { path: "movie" },
       })
-      .sort({ createAt: -1 });
+      .sort({ createdAt: -1 });
     res.json({ success: true, bookings });
   } catch (error) {
     console.log(error.message);

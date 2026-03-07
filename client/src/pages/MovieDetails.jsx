@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { dummyDateTimeData, dummyShowsData } from "../assets/assets";
 import BlurCircle from "../components/BlurCircle";
 import { Heart, PlayCircleIcon, StarIcon } from "lucide-react";
 import timeFormat from "../lib/timeFormat";
@@ -15,6 +14,7 @@ const MovieDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [show, setShow] = useState(null);
+  const [isUpdatingFavorite, setIsUpdatingFavorite] = useState(false);
 
   const getShow = async () => {
     try {
@@ -28,8 +28,10 @@ const MovieDetails = () => {
   };
 
   const handleFavorite = async () => {
+    if (isUpdatingFavorite) return;
     try {
       if (!user) return toast.error("Please login to proceed");
+      setIsUpdatingFavorite(true);
       const {data} = await axios.post('/api/user/update-favorite', {movieId: id}, 
         {headers: {Authorization: `Bearer ${await getToken()}`}}
       )
@@ -39,6 +41,8 @@ const MovieDetails = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsUpdatingFavorite(false);
     }
   }
 
@@ -84,7 +88,7 @@ const MovieDetails = () => {
             >
               Buy Tickets
             </a>
-            <button onClick={handleFavorite} className="bg-gray-700 p-2.5 rounded-full transition cursor-pointer active:scale-95">
+            <button disabled={isUpdatingFavorite} onClick={handleFavorite} className="bg-gray-700 p-2.5 rounded-full transition cursor-pointer active:scale-95">
               <Heart className={`w-5 h-5 ${favoriteMovies.find(movie => movie._id === id) ? 'fill-primary text-primary' : "" }`} />
             </button>
           </div>
@@ -111,8 +115,8 @@ const MovieDetails = () => {
 
       <p className="text-lg font-medium mt-20 mb-8">You May Also Like</p>
       <div className="flex flex-wrap max-sm:justify-center gap-8">
-        {shows.slice(0, 4).map((movie, index) => (
-          <MovieCard key={index} movie={movie} />
+        {shows.slice(0, 4).map((movie) => (
+          <MovieCard key={movie._id} movie={movie} />
         ))}
       </div>
 

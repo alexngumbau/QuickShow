@@ -13,7 +13,7 @@ const Movies = () => {
       
       <div className='flex flex-wrap max-sm:justify-center gap-8'>
         {shows.map((movie) => (
-          <MovieCard movie={movie} key={movie.id} />
+          <MovieCard movie={movie} key={movie._id} />
         ))}
       </div>
     </div>

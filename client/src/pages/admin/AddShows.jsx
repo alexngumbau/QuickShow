@@ -77,6 +77,7 @@ const AddShows = () => {
     }
 
     if (errorMessages.length > 0) {
+      setAddingShow(false);
       return toast(errorMessages.join(" "));
     }
 

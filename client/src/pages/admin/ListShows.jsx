@@ -20,10 +20,15 @@ const ListShows = () => {
           Authorization: `Bearer ${await getToken()}`,
         },
       });
-      setShows(data.shows);
-      setLoading(false);
+      if (!data.success) {
+        setShows([]);
+        return;
+      }
+      setShows(data.shows ?? []);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 

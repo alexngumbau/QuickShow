@@ -15,15 +15,20 @@ const ListBookings = () => {
 
   const getAllBookings = async () => {
     try {
-      const { data } = await axios.get("/api/admin/all-bookings", {
+      const { data } = await axios.get("/api/admin/all-bookingss", {
         headers: {
           Authorization: `Bearer ${await getToken()}`,
         },
       });
-      setBookings(data.bookings);
-      setIsLoading(false);
+      if (!data.success) {
+        setBookings([]);
+        return;
+      }
+      setBookings(data.bookings ?? []);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false)
     }
   };
 

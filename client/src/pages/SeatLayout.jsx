@@ -97,7 +97,7 @@ const SeatLayout = () => {
       if (!user) return toast.error("Please login to proceed")
       if (!selectedTime || !selectedSeats.length) return toast.error("Please select a time and seats");
 
-      const {data} = await axios.post('/api/booking/create', {showId: selectedTime.showId, selectedSeats}, {
+      const {data} = await axios.post('/api/bookings/create', {showId: selectedTime.showId, selectedSeats}, {
         headers: {Authorization: `Bearer ${await getToken()}`}
       })
 
@@ -118,6 +118,8 @@ const SeatLayout = () => {
 
   useEffect(() => {
     if (selectedTime) {
+      console.log(selectedTime);
+      
       getOccupiedSeats();
     }
   }, [selectedTime])

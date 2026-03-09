@@ -1,3 +1,4 @@
+import { inngest } from "../inngest/index.js";
 import Booking from "../models/Booking.js";
 import Show from "../models/Show.js";
 import stripe from "stripe";
@@ -82,6 +83,13 @@ export const createBooking = async (req, res) => {
     booking.paymentLink = session.url
     await booking.save();
 
+    // Run Inngest scheduler function to check payment status after 10 minutes
+    await inngest.send({
+      name: "app/checkpayment",
+      data: {
+        bookingId: booking._id.toString()
+      }
+    })
 
     res.json({ success: true, url: session.url });
 

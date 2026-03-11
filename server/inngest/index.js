@@ -127,7 +127,7 @@ const sendShowReminders = inngest.createFunction(
       for (const show of shows) {
         if (!show.movie || !show.occupiedSeats) continue;
 
-        const userIds = [...new set(Object.values(show.occupiedSeats))];
+        const userIds = [...new Set(Object.values(show.occupiedSeats))];
         if (userIds.length === 0) continue;
 
         const users = await User.find({ _id: { $in: userIds } }).select(
